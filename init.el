@@ -64,8 +64,7 @@
   :commands lsp)
 
 (use-package lsp-ui
-  :ensure t
-  )
+  :ensure t)
 
 ;; Auto-generated
 (custom-set-variables
@@ -84,4 +83,6 @@
  ;; If there is more than one, they won't work right.
  )
 
+(use-package zenburn-theme
+  :ensure t)
 (load-theme 'zenburn t)
