@@ -11,15 +11,6 @@
   (package-install 'use-package))
 (require 'use-package)
  
-;; Set the cmd key as 'meta' (`M-` in all tutorials)
-
-;; This doesn't seem to work:
-;; (setq mac-command-modifier 'meta)
-
-;; This doesn't seem to work:
-;; (setq mac-option-key-is-meta nil
-;;      mac-command-key-is-meta t)
-
 ;; Suppress the 'About Emacs' splash screen on startup
 (setq inhibit-splash-screen t)
 
@@ -27,6 +18,12 @@
 (setq calendar-longitude -74.0060)
 (setq calendar-latitude 40.7128)
 (setq qcalendar-location-name "New York City, NY")
+
+;; When opening a symlink to a version controlled file (e.g. in a git repo),
+;; follow the symlink to the true file without prompting the user for a 'y/n?'
+;; Note that this discards the symlink path that was used to open the file; emacs
+;; will always refer to the 'true' path of the file from this point on.
+(setq vc-follow-symlinks t)
 
 ;; Dictionary
 (use-package define-word
@@ -36,11 +33,13 @@
 
 ;; Show which key chords are available after what you've typed so far
 (use-package which-key
+  :ensure t
   :config
   (which-key-mode))
 
 ;; Move between windows/frames via the arrow keys instead of "C-x o"
 (use-package windmove
+  :ensure t
   :bind
   ("C-x <up>" . windmove-up)
   ("C-x <down>" . windmove-down)
@@ -49,19 +48,24 @@
 
 ;; Linting
 (use-package flycheck
+  :ensure t
   :hook (prog-mode . flycheck-mode))
 
 ;; Completion
 (use-package company
+  :ensure t
   :hook (prog-mode . company-mode)
   :config (setq company-tooltip-align-annotations t)
           (setq company-minimum-prefix-length 1))
 
 ;; Language Server Protocol
 (use-package lsp-mode
+  :ensure t
   :commands lsp)
 
-(use-package lsp-ui)
+(use-package lsp-ui
+  :ensure t
+  )
 
 ;; Auto-generated
 (custom-set-variables
